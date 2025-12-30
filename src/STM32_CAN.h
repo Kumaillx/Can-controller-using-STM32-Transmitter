@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-// CAN message structure
+// CAN message 
 struct CAN_Message {
   uint32_t id;
   uint8_t length;

@@ -31,7 +31,7 @@ void STM32_CAN::configurePins() {
 
 bool STM32_CAN::setBitTiming(uint32_t bitrate) {
     if (bitrate != 500000) {
-        // Only 500kbps is supported in this example
+        // Only 500kbps is supported
         return false;
     }
 
@@ -89,6 +89,4 @@ void STM32_CAN::write(CAN_Message &msg) {
         // Request transmission
         CAN_TI0R |= 1; 
     }
-    // Note: This is a simplified implementation. A robust driver would check all mailboxes
-    // and handle cases where no mailbox is free.
 }

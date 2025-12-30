@@ -14,12 +14,16 @@ void setup() {
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, HIGH); // Turn LED off (it's active low)
 
+  // Initialize Serial for debugging
+  Serial.begin(115200);
+  while (!Serial); // Wait for serial port to connect
+  Serial.println("CAN Sender - Initializing...");
+
   // Initialize CAN bus at 500kbps
   if (CAN.begin(500000)) {
-    // Optional: Add serial output for debugging
-    // Serial.begin(115200);
-    // Serial.println("CAN Sender Initialized");
+    Serial.println("CAN Initialized Successfully");
   } else {
+    Serial.println("CAN Initialization FAILED");
     // Loop and blink fast if CAN init fails
     while (1) {
       digitalWrite(LED_PIN, LOW);
@@ -47,6 +51,10 @@ void loop() {
 
     // Send the message
     CAN.write(msg);
+
+    // Print to serial monitor
+    Serial.print("Sent CAN message with ID 0x123, counter: ");
+    Serial.println(counter);
 
     // Blink the LED to indicate transmission
     digitalWrite(LED_PIN, LOW); // Turn LED on
